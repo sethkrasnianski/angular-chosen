@@ -60,8 +60,10 @@ angular.module('localytics.directives').directive 'chosen', ['$timeout', '$parse
       else
         chosen = element.chosen(options).data('chosen')
         defaultText = chosen.default_text
-        scope.$watch attr.ngModel, ->
+        scope.$watch attr.ngModel, (newVal) ->
+          return if not newVal
           console.log ngModelGet(scope)
+          console.log element.next()
 
     # Use Chosen's placeholder or no results found text depending on whether there are options available
     removeEmptyMessage = ->

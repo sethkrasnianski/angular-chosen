@@ -56,8 +56,12 @@
             } else {
               chosen = element.chosen(options).data('chosen');
               defaultText = chosen.default_text;
-              return scope.$watch(attr.ngModel, function() {
-                return console.log(ngModelGet(scope));
+              return scope.$watch(attr.ngModel, function(newVal) {
+                if (!newVal) {
+                  return;
+                }
+                console.log(ngModelGet(scope));
+                return console.log(element.next());
               });
             }
           };
