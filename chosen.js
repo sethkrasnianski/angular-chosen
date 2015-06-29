@@ -49,7 +49,7 @@
           chosen = null;
           defaultText = null;
           empty = false;
-          ngModelGet = $parse(attrs.ngModel);
+          ngModelGet = $parse(attr.ngModel);
           initOrUpdate = function() {
             if (chosen) {
               return element.trigger('chosen:updated');

@@ -52,7 +52,7 @@ angular.module('localytics.directives').directive 'chosen', ['$timeout', '$parse
     defaultText = null
     empty = false
 
-    ngModelGet = $parse(attrs.ngModel)
+    ngModelGet = $parse(attr.ngModel)
 
     initOrUpdate = ->
       if chosen
