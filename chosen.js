@@ -32,7 +32,7 @@
         require: '?ngModel',
         terminal: true,
         link: function(scope, element, attr, ngModel) {
-          var chosen, defaultText, disableWithMessage, empty, initOrUpdate, match, options, origRender, removeEmptyMessage, startLoading, stopLoading, valuesExpr, viewWatch;
+          var chosen, defaultText, disableWithMessage, empty, initOrUpdate, match, ngModelGet, options, origRender, removeEmptyMessage, startLoading, stopLoading, valuesExpr, viewWatch;
           element.addClass('localytics-chosen');
           options = scope.$eval(attr.chosen) || {};
           angular.forEach(attr, function(value, key) {
@@ -49,13 +49,16 @@
           chosen = null;
           defaultText = null;
           empty = false;
+          ngModelGet = $parse(attrs.ngModel);
           initOrUpdate = function() {
             if (chosen) {
               return element.trigger('chosen:updated');
             } else {
               chosen = element.chosen(options).data('chosen');
-              console.log(chosen);
-              return defaultText = chosen.default_text;
+              defaultText = chosen.default_text;
+              return scope.$watch(attr.ngModel, function() {
+                return console.log(ngModelGet(scope));
+              });
             }
           };
           removeEmptyMessage = function() {
